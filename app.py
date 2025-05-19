@@ -1,5 +1,6 @@
 
 import streamlit as st
+import requests
 from datetime import datetime
 from streamlit_drawable_canvas import st_canvas
 
@@ -8,6 +9,16 @@ st.set_page_config(page_title="SHIROE LABO カウンセリングシート", layo
 # ロゴとタイトル
 st.image("logo.png", width=300)
 st.markdown("## カウンセリングシート")
+
+def lookup_address(zipcode):
+    if len(zipcode) == 7 and zipcode.isdigit():
+        response = requests.get(f"https://zipcloud.ibsnet.co.jp/api/search?zipcode={zipcode}")
+        if response.status_code == 200:
+            data = response.json()
+            if data["results"]:
+                result = data["results"][0]
+                return f"{result['address1']}{result['address2']}{result['address3']}"
+    return ""
 
 with st.form(key="counseling_form"):
     st.subheader("■ 基本情報")
@@ -44,7 +55,8 @@ with st.form(key="counseling_form"):
         st.warning("正しい生年月日を選択してください。")
 
     zipcode = st.text_input("郵便番号（ハイフンなし）")
-    address = st.text_input("住所")
+    address_default = lookup_address(zipcode)
+    address = st.text_input("住所", value=address_default)
     phone = st.text_input("電話番号")
 
     st.subheader("■ 印象・目的について")
@@ -80,17 +92,8 @@ with st.form(key="counseling_form"):
 
     st.subheader("■ 同意事項")
     with st.expander("▼ ご確認ください（クリックで表示）", expanded=False):
-        st.markdown("""
-●個人情報の使用について
-当店ではお客様の個人情報をお聞きしておりますが、これらの情報は、ご利用者様の確認・照会にのみ使用しております。
-法律に基づき開示が義務づけられている等の特別な事情がない限り、お客様ご本人の事前の許可なく第三者に個人情報を提供いたしません。
-住所・ご登録内容に変更がありました場合はご連絡ください。
-
-●施術後の仕上がりには個人差があります。
-●医療機関で治療を受けている方やお痛みのある方はご相談ください。
-●妊娠中の方は医師に確認の上、施術を行ってください。
-●施術後の返金には応じかねます。
-        """)
+        st.markdown("●施術後の仕上がりには個人差があります。
+●医療機関で治療中の方は医師へ確認の上で施術を行ってください。")
 
     agree = st.checkbox("上記注意事項をすべて確認し、同意しました。")
     date = datetime.today().strftime("%Y-%m-%d")
