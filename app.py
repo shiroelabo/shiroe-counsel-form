@@ -61,22 +61,22 @@ with st.form(key="counseling_form"):
 
     st.subheader("■ 印象・目的について")
 
-    impressions = st.multiselect("なりたい印象（複数選択）", [
+    impressions = impressions = st.multiselect("なりたい印象（複数選択）", [
         "清潔感がある", "若々しく見える", "自信がありそう", "垢抜けている",
         "健康的な印象", "信頼感", "話しかけやすい", "透明感がある"
     ])
 
-    motive = st.multiselect("ご来店の目的・背景（複数選択）", [
+    motive = motive = st.multiselect("ご来店の目的・背景（複数選択）", [
         "仕事・面接に向けて", "恋愛・婚活", "大切な予定のため", "自分磨きの一環として",
         "SNSなどで気になった", "久々に人と会う予定", "なんとなく整えたい"
     ])
 
-    tooth_state = st.radio("現在の歯の状態", [
-        "特に気にしていない", "少し黄ばみが気になる", "人と比べて気になる",
+    tooth_state = tooth_state = st.multiselect("現在の歯の状態（複数選択可）", [
+        "少し黄ばみが気になる", "人と比べて気になる",
         "鏡や写真で気になる", "笑う時に気になる"
     ])
 
-    history = st.multiselect("これまでのホワイトニング経験（複数選択）", [
+    history = history = st.multiselect("これまでのホワイトニング経験（複数選択）", [
         "初めて", "歯科ホワイトニング", "セルフホワイトニング（サロン）",
         "ホームホワイトニング（歯科キット）", "市販ホワイトニング（歯磨き粉・シート等）"
     ])
