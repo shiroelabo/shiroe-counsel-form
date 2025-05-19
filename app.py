@@ -1,4 +1,3 @@
-
 import streamlit as st
 import requests
 from datetime import datetime
@@ -127,3 +126,4 @@ with st.form(key="counseling_form"):
             st.warning("署名が見つかりません。もう一度お試しください。")
     elif submit_btn and not agree:
         st.error("注意事項への同意が必要です。")
+
