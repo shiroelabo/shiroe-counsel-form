@@ -92,8 +92,11 @@ with st.form(key="counseling_form"):
 
     st.subheader("■ 同意事項")
     with st.expander("▼ ご確認ください（クリックで表示）", expanded=False):
-        st.markdown("●施術後の仕上がりには個人差があります。
-●医療機関で治療中の方は医師へ確認の上で施術を行ってください。")
+        st.markdown("""  
+●施術後の仕上がりには個人差があります。  
+●医療機関で治療中の方は医師へ確認の上で施術を行ってください。  
+●施術後の返金には応じかねます。  
+        """)
 
     agree = st.checkbox("上記注意事項をすべて確認し、同意しました。")
     date = datetime.today().strftime("%Y-%m-%d")
