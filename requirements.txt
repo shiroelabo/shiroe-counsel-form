@@ -1,4 +1,3 @@
-
 streamlit
+toolz
 streamlit-drawable-canvas
-pillow
