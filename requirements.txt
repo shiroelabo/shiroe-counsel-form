@@ -1,3 +1,2 @@
 streamlit
-toolz
 streamlit-drawable-canvas
